@@ -30,7 +30,7 @@ function orderIceCream(e) {
 async function getAvailableFlavours() {
 
     try {
-        const response = await fetch("http://localhost:3000/flavours");
+        const response = await fetch("http://localhost:5000/flavours");
         const data = await response.json();
         return data["flavours"];
     } catch (error) {
