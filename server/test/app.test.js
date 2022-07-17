@@ -46,7 +46,7 @@ describe("API", () => {
                     })
     })
 
-    it("Retrieve desired flavour by id at /flavours/:id", async () => {
+    it("Check if entered id exists at /flavours/:id", async () => {
         const response = await supertest(api).get('/flavours/2').set('Accept', 'application/json')
         expect(response.body.flavour.id).toBe(2)
     })
@@ -57,6 +57,11 @@ describe("API", () => {
         expect(response.body.error).toBeTruthy()
     })
 
+    it('Check if the body is .json format on POST request at /flavours', (done) => {
+        supertest(api).post('/flavours').expect('Content-Type', /^application\/json/, done)
+        
+    })
+
     it('Retrieve status 201 after a POST request at /flavours', (done) => {
         supertest(api).post('/flavours').expect(201, done)
     })
@@ -65,4 +70,5 @@ describe("API", () => {
         const response = await supertest(api).post('/flavours').set('Accept', 'application/json')
         expect(response.body.success).toBeTruthy()
     })
+
 })
