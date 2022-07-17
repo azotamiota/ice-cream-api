@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json())
 
 app.get('/', (req, res) => {
-    res.send('Hello')
+    res.status(200).json({"All available ice creams" : data})
 })
 
 app.get('/flavours', (req, res) => {
@@ -18,7 +18,6 @@ app.get('/flavours', (req, res) => {
         flavours = flavours.filter(f => f['vegan'] === false)
     }
     
-
     res.json({
         flavours: flavours.map(flavour => flavour['flavour'])
     })
@@ -43,12 +42,9 @@ app.get('/flavours/:id', (req, res) => {
 })
 
 app.post('/flavours', (req, res) => {
-    console.log(req.body);
-
     const newFlavour = req.body
     newFlavour['id'] = data.length + 1
     data.push(newFlavour)
-
     res.status(201).json({success: true,
     flavour: newFlavour})
 })
